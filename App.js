@@ -1,28 +1,28 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Image, View, ImageBackground, Text } from "react-native";
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppNav } from "./src/navigations/AppNav";
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("./assets/Vector.png")}
-        style={{ top:'7%', alignSelf:'flex-end'}}
-      >
-      </Image>
-
-      <Image
-        source={require("./assets/AppLogo.png")}
-        style={{ position:'absolute', alignSelf:'center', bottom:'50%'}}
-      >
-      </Image>
-    </View>
+    <AppNav />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+
     backgroundColor: "#5D5FEF",
   },
 
