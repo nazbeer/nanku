@@ -1,0 +1,48 @@
+# Dependency directories
+/node_modules
+/npm-debug.log
+
+# Expo directories
+/.expo
+/.expo-shared
+/web-build
+
+# iOS build
+/ios/Pods
+/ios/build
+/ios/Podfile.lock
+/ios/Podfile
+/ios/Pods/
+/ios/DerivedData
+
+# Android build
+/android/build
+/android/app/build
+/android/gradle
+/android/local.properties
+/android/.gradle
+/android/captures
+
+# .env file (if you use environment variables)
+/.env
+
+# Log files
+*.log
+
+# macOS directory
+.DS_Store
+
+# Editor/IDE specific files
+.idea
+.vscode
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Node.js generated files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
