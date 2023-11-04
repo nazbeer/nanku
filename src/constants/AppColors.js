@@ -1,6 +1,6 @@
 const AppColors = {
-    primaryColor:'#6EA5D9',
-    //primaryColor:' rgba(110, 165, 217, 1)',
+    primaryColor:'#5d5fef',
+    primaryColorLight:'#d3d3f9',
     primaryTextColor:'#6EA5D9',
     secondaryTextColor:'rgba(0, 0, 0, 0.5)',
     secondaryColor:'#EBEBEB',

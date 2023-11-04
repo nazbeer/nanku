@@ -10,7 +10,7 @@ const AppStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerBackTitleVisible: false, headerShown:false}}>
             <Stack.Screen name={Routes.splash} component={SplashScreen} />
-            <Stack.Screen name={Routes.login} component={HomePage} />
+            <Stack.Screen name={Routes.home} component={HomePage} />
         </Stack.Navigator>
     );
 };
