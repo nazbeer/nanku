@@ -46,42 +46,47 @@ const OtpScreen = ({ navigation }) => {
       <Text style={styles.headerText}>Enter Your OTP</Text>
 
       <View style={styles.otpSent}>
-  <Text style={styles.otpResendText}>Enter OTP code we sent to <Text style={styles.boldText}>+132547546xx</Text></Text>
-  <Text style={styles.otpExpiryText}>This code will expire in <Text style={{color:AppColors.primaryColor}}>01:30</Text></Text>
-</View>
-
-  
+        <Text style={styles.otpResendText}>
+          Enter OTP code we sent to{" "}
+          <Text style={styles.boldText}>+132547546xx</Text>
+        </Text>
+        <Text style={styles.otpExpiryText}>
+          This code will expire in{" "}
+          <Text style={{ color: AppColors.primaryColor }}>01:30</Text>
+        </Text>
+      </View>
 
       <View style={styles.otpInputContainer}>
         {otp.map((value, index) => (
-        <TextInput
-        key={index}
-        style={styles.otpInput}
-        value={value}
-        onChangeText={(text) => handleOtpChange(index, text)}
-        keyboardType="numeric" // Set keyboardType to "numeric"
-        maxLength={1}
-        ref={(input) => (otpInputs[index] = input)}
-        onSubmitEditing={() => {
-          if (index < MAX_INPUTS - 1) {
-            otpInputs[index + 1].focus();
-          }
-        }}
-      />
-      
+          <TextInput
+            key={index}
+            style={styles.otpInput}
+            value={value}
+            onChangeText={(text) => handleOtpChange(index, text)}
+            keyboardType="numeric" // Set keyboardType to "numeric"
+            maxLength={1}
+            ref={(input) => (otpInputs[index] = input)}
+            onSubmitEditing={() => {
+              if (index < MAX_INPUTS - 1) {
+                otpInputs[index + 1].focus();
+              }
+            }}
+          />
         ))}
       </View>
       <View style={styles.otpResend}>
-        <Text style={styles.otpResendText}>Don't have an account? </Text>
-        <TouchableOpacity>
-          <Text style={styles.otpResendLink}>Sign Up</Text>
+        <Text style={styles.otpResendText}>Didn't received the code ? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("createProfile")}>
+          <Text style={styles.otpResendLink}>Resend Code</Text>
         </TouchableOpacity>
       </View>
-      <PrimaryButton buttonText="Continue" onPress={() => navigation.navigate("otp")} />
+      <PrimaryButton
+        buttonText="Continue"
+        onPress={() => navigation.navigate("createProfile")}
+      />
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -122,8 +127,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: AppColors.primaryColor,
     borderWidth: 1,
-    borderColor: AppColors.primaryColor, 
-    borderRadius: 10, 
+    borderColor: AppColors.primaryColor,
+    borderRadius: 10,
     textAlign: "center",
     marginHorizontal: 5,
   },
@@ -132,30 +137,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 20,
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    width:"100%"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   },
   otpResendText: {
     color: "black",
- 
   },
   otpResendLink: {
     color: AppColors.primaryColor,
     fontWeight: "bold",
   },
-  otpSent:{
+  otpSent: {
     alignItems: "center",
     marginTop: 20,
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    width:"100%"
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   },
-  boldText:{
-    fontWeight:'bold'
-  }
+  boldText: {
+    fontWeight: "bold",
+  },
 });
 
 export default OtpScreen;
