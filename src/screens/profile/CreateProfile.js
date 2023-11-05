@@ -13,6 +13,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AppColors from "../../constants/AppColors";
 import InterestButtons from "../../components/InterestButtons";
 import UploadImage from "../../components/UploadImage";
+import PrimaryButton from "../../components/PrimaryButton";
 
 const window = Dimensions.get("window");
 const headerContainerHeight = window.height * 0.1;
@@ -73,9 +74,16 @@ const CreateProfile = ({ navigation }) => {
         {step === 3 && (
           <View>
           <UploadImage/>
+          <PrimaryButton
+      buttonText="Next"
+      onPress={() => navigation.navigate("createProfile")}
+    />
           </View>
         )}
       </View>
+
+      {step !== 3 && (
+
       <View style={styles.nextButton}>
         <TouchableOpacity onPress={handleNextStep}>
           <View style={styles.circle}>
@@ -83,6 +91,7 @@ const CreateProfile = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
+      )}
       <View style={styles.progressContainer}>
         <Text>
           <Text>
@@ -101,11 +110,11 @@ const CreateProfile = ({ navigation }) => {
                 width: `${(step / 3) * 100}%`,
                 backgroundColor:
                   step === 1
-                    ? AppColors.primaryColor
+                    ? AppColors.primaryColorNormal
                     : step === 2
-                    ? AppColors.primaryColor
+                    ? AppColors.primaryColorNormal
                     : step === 3
-                    ? AppColors.primaryColor
+                    ? AppColors.primaryColorNormal
                     : "lightgray",
               },
             ]}

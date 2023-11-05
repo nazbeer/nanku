@@ -8,7 +8,7 @@ const InterestButtons = () => {
   const handleInterestSelect = (interest) => {
     if (selectedInterests.includes(interest)) {
       setSelectedInterests(selectedInterests.filter((item) => item !== interest));
-    } else {
+    } else if (selectedInterests.length < 5) { // Limit to 5 selections
       setSelectedInterests([...selectedInterests, interest]);
     }
   };
