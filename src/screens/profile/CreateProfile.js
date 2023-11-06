@@ -25,6 +25,7 @@ const CreateProfile = ({ navigation }) => {
   const [gender, setGender] = useState("");
   const [step, setStep] = useState(1);
   const [headerText, setHeaderText] = useState("Enter Your Name");
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleNextStep = () => {
     if (step === 1) {
@@ -35,7 +36,15 @@ const CreateProfile = ({ navigation }) => {
       setStep(3);
     }
   };
-
+  const showModal = () => {
+    setModalVisible(true);
+  };
+  
+  // Function to hide the modal
+  const hideModal = () => {
+    setModalVisible(false);
+  };
+  
   return (
     <KeyboardAvoidingView
       style={styles.container}

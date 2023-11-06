@@ -44,10 +44,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   buttonTextGoogle: {
     color: AppColors.primaryColor,
     fontSize: 18,
     fontWeight: "bold",
+    flex: 1,
+    textAlign: "center",
+    marginRight: 40,
   },
   googleLogo: {
     width: 29,
