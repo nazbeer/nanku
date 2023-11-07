@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,8 +15,10 @@ const window = Dimensions.get("window");
 const headerContainerHeight = window.height * 0.1;
 const backCircleSize = window.width * 0.1;
 
+
 const OtpScreen = ({ navigation }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [timer, setTimer] = useState(90); // Initial timer value in seconds
   const otpInputs = [];
   const MAX_INPUTS = 6;
 
@@ -29,6 +31,21 @@ const OtpScreen = ({ navigation }) => {
     updatedOtp[index] = value;
     setOtp(updatedOtp);
   };
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdown);
+      }
+    }, 1000);
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(countdown);
+    };
+  }, [timer]);
 
   return (
     <View style={styles.container}>
@@ -47,12 +64,16 @@ const OtpScreen = ({ navigation }) => {
 
       <View style={styles.otpSent}>
         <Text style={styles.otpResendText}>
-          Enter OTP code we sent to{" "}
+          Enter OTP code we sent to{' '}
           <Text style={styles.boldText}>+132547546xx</Text>
         </Text>
         <Text style={styles.otpExpiryText}>
-          This code will expire in{" "}
-          <Text style={{ color: AppColors.primaryColor }}>01:30</Text>
+          This code will expire in{' '}
+          <Text style={{ color: AppColors.primaryColor }}>
+            {`${Math.floor(timer / 60)
+              .toString()
+              .padStart(2, '0')}:${(timer % 60).toString().padStart(2, '0')}`}
+          </Text>
         </Text>
       </View>
 
@@ -63,7 +84,7 @@ const OtpScreen = ({ navigation }) => {
             style={styles.otpInput}
             value={value}
             onChangeText={(text) => handleOtpChange(index, text)}
-            keyboardType="numeric" // Set keyboardType to "numeric"
+            keyboardType="numeric"
             maxLength={1}
             ref={(input) => (otpInputs[index] = input)}
             onSubmitEditing={() => {
@@ -74,12 +95,14 @@ const OtpScreen = ({ navigation }) => {
           />
         ))}
       </View>
+
       <View style={styles.otpResend}>
-        <Text style={styles.otpResendText}>Didn't received the code ? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("createProfile")}>
+        <Text style={styles.otpResendText}>Didn't receive the code ? </Text>
+        <TouchableOpacity >
           <Text style={styles.otpResendLink}>Resend Code</Text>
         </TouchableOpacity>
       </View>
+
       <PrimaryButton
         buttonText="Continue"
         onPress={() => navigation.navigate("createProfile")}
@@ -87,6 +110,7 @@ const OtpScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -151,7 +175,7 @@ const styles = StyleSheet.create({
   },
   otpSent: {
     alignItems: "center",
-    marginTop: 20,
+    paddingTop: 20,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

@@ -8,24 +8,38 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  Modal,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import AppColors from "../../constants/AppColors";
 import InterestButtons from "../../components/InterestButtons";
 import UploadImage from "../../components/UploadImage";
 import PrimaryButton from "../../components/PrimaryButton";
-
+import { Dialog, Portal } from "react-native-paper";
+import DialogModal from "../../components/DialogModal";
 const window = Dimensions.get("window");
 const headerContainerHeight = window.height * 0.1;
 const backCircleSize = window.width * 0.1;
 
 const CreateProfile = ({ navigation }) => {
+  const [visible, setVisible] = React.useState(false);
+
+  const [isDialogVisible, setDialogVisible] = useState(false);
+
+  const showDialog = () => {
+    setDialogVisible(true);
+  };
+
+  const hideDialog = () => {
+    setDialogVisible(false);
+  };
+
+  const openModal = () => {
+    setVisible(true);
+  };
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [gender, setGender] = useState("");
   const [step, setStep] = useState(1);
   const [headerText, setHeaderText] = useState("Enter Your Name");
-  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleNextStep = () => {
     if (step === 1) {
@@ -36,15 +50,7 @@ const CreateProfile = ({ navigation }) => {
       setStep(3);
     }
   };
-  const showModal = () => {
-    setModalVisible(true);
-  };
-  
-  // Function to hide the modal
-  const hideModal = () => {
-    setModalVisible(false);
-  };
-  
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -82,24 +88,21 @@ const CreateProfile = ({ navigation }) => {
 
         {step === 3 && (
           <View>
-          <UploadImage/>
-          <PrimaryButton
-      buttonText="Next"
-      onPress={() => navigation.navigate("createProfile")}
-    />
+            <UploadImage />
+            <PrimaryButton buttonText="Next" onPress={showDialog} />
+            <DialogModal visible={isDialogVisible} hideDialog={hideDialog} />
           </View>
         )}
       </View>
 
       {step !== 3 && (
-
-      <View style={styles.nextButton}>
-        <TouchableOpacity onPress={handleNextStep}>
-          <View style={styles.circle}>
-            <MaterialIcons name="arrow-forward" size={24} color={"white"} />
-          </View>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.nextButton}>
+          <TouchableOpacity onPress={handleNextStep}>
+            <View style={styles.circle}>
+              <MaterialIcons name="arrow-forward" size={24} color={"white"} />
+            </View>
+          </TouchableOpacity>
+        </View>
       )}
       <View style={styles.progressContainer}>
         <Text>

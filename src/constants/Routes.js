@@ -4,7 +4,9 @@ const Routes = {
     login: 'login',
     phoneLogin:'phoneLogin',
     otp:'otp',
-    createProfile:'createProfile'
+    createProfile:'createProfile',
+    loginHome:'loginHome',
+    loginPhone:'loginPhone'
 };
 
 export default Routes;
