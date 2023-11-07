@@ -3,26 +3,62 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import AppColors from "../constants/AppColors";
 import * as ImagePicker from "expo-image-picker";
+import PrimaryButton from "./PrimaryButton";
+import DialogModal from "./DialogModal";
 
 const BoxWithCards = () => {
+  const [isDialogVisible, setDialogVisible] = useState(false);
+  const [imageUploaded, setImageUploaded] = useState(false);
+  const showDialog = () => {
+    setDialogVisible(true);
+  };
+
+  const hideDialog = () => {
+    setDialogVisible(false);
+  };
+
+  const handleImageUploadSuccess = () => {
+    setImageUploaded(true);
+  };
   return (
-    <View style={styles.box}>
-      <View style={styles.row}>
-        <Card style={styles.doubleWidthCard} />
-        <Card style={styles.card} />
+    <>
+      <View style={styles.box}>
+        <View style={styles.row}>
+          <Card
+            style={styles.doubleWidthCard}
+            onImageUploadSuccess={handleImageUploadSuccess}
+          />
+          <Card
+            style={styles.card}
+            onImageUploadSuccess={handleImageUploadSuccess}
+          />
+        </View>
+        <View style={styles.row}>
+          <Card
+            style={styles.card}
+            onImageUploadSuccess={handleImageUploadSuccess}
+          />
+          <Card
+            style={styles.card}
+            onImageUploadSuccess={handleImageUploadSuccess}
+          />
+          <Card
+            style={styles.card}
+            onImageUploadSuccess={handleImageUploadSuccess}
+          />
+        </View>
       </View>
-      <View style={styles.row}>
-        <Card style={styles.card} />
-        <Card style={styles.card} />
-        <Card style={styles.card} />
-      </View>
-    </View>
+      {imageUploaded ? (
+        <PrimaryButton buttonText="Next" onPress={showDialog} />
+      ) : null}
+      <DialogModal visible={isDialogVisible} hideDialog={hideDialog} />
+    </>
   );
 };
 
-const Card = ({ text, style, children }) => {
+const Card = ({ text, style, children, onImageUploadSuccess }) => {
   const [imageUri, setImageUri] = useState(null);
-
+  const [, setImageUploaded] = useState(false);
   const pickImage = async () => {
     try {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,6 +71,8 @@ const Card = ({ text, style, children }) => {
       if (!result.cancelled) {
         const newImageUri = result.assets[0].uri;
         setImageUri(newImageUri);
+        setImageUploaded(true);
+        onImageUploadSuccess();
         console.log("Image URI:", newImageUri);
       }
     } catch (error) {

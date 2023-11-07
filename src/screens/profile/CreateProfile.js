@@ -14,9 +14,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import AppColors from "../../constants/AppColors";
 import InterestButtons from "../../components/InterestButtons";
 import UploadImage from "../../components/UploadImage";
-import PrimaryButton from "../../components/PrimaryButton";
-import { Dialog, Portal } from "react-native-paper";
-import DialogModal from "../../components/DialogModal";
+
 const window = Dimensions.get("window");
 const headerContainerHeight = window.height * 0.1;
 const backCircleSize = window.width * 0.1;
@@ -89,8 +87,7 @@ const CreateProfile = ({ navigation }) => {
         {step === 3 && (
           <View>
             <UploadImage />
-            <PrimaryButton buttonText="Next" onPress={showDialog} />
-            <DialogModal visible={isDialogVisible} hideDialog={hideDialog} />
+    
           </View>
         )}
       </View>
