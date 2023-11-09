@@ -11,6 +11,7 @@ import AppColors from "../../constants/AppColors";
 import { MaterialIcons } from "@expo/vector-icons";
 import PrimaryButton from "../../components/PrimaryButton";
 import LoginWithGoogleBtn from "../../components/LoginWithGoogleBtn";
+import Routes from "../../constants/Routes";
 
 const window = Dimensions.get("window");
 const logoSize = window.width * 0.8;
@@ -28,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
       <PrimaryButton
         iconName="phone"
         buttonText="Login with Phone"
-        onPress={() => navigation.navigate("phoneLogin")}
+        onPress={() => navigation.navigate(Routes.phoneLogin)}
       />
 
       <LoginWithGoogleBtn buttonText="Login with Google" />
